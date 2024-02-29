@@ -11,8 +11,11 @@ import (
 
 func main() {
 	// Определение аргументов командной строки с значениями по умолчанию
-	defaultIP := "ya.ru"
+	defaultIP := "10.45.1.1"
 	defaultSoundFile := "Start-Process 'C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe'" // -ArgumentList 'C:\\Windows\\Media\\ringout.wav' -PassThru | Out-File 'C:\\ARHIV\\pingmonitor\\log.txt'" // Убедитесь, что у вас есть этот файл в директории с программой
+	//// When compiling for Linux:
+	//defaultSoundFile := "./Notification.wav"
+
 	ip := flag.String("ip", defaultIP, "IP address to ping")
 	soundFile := flag.String("sound", defaultSoundFile, "Path to the sound file")
 
@@ -52,6 +55,11 @@ func ping(ip string) bool {
 	return true
 }
 
+func stopSound(alarmPlaying *bool) {
+
+	*alarmPlaying = false
+}
+
 func playSound(soundFile *string, alarmPlaying *bool) {
 	*alarmPlaying = true
 
@@ -65,7 +73,16 @@ func playSound(soundFile *string, alarmPlaying *bool) {
 	*alarmPlaying = false
 }
 
-func stopSound(alarmPlaying *bool) {
-
-	*alarmPlaying = false
-}
+//// When compiling for Linux:
+//func playSound(soundFile *string, alarmPlaying *bool) {
+//	*alarmPlaying = true
+//	cmd := exec.Command("aplay", *soundFile)
+//	err := cmd.Start()
+//	if err != nil {
+//		fmt.Println("Failed to start sound:", err)
+//		*alarmPlaying = false
+//		return
+//	}
+//	cmd.Wait()
+//	*alarmPlaying = false
+//}
