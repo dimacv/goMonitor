@@ -4,7 +4,7 @@
     
 Usage of gomonitor.exe:  
   -interval int  
-        Interval in seconds between connect attempts (default 10)  
+              Interval in seconds between connect attempts (default 10)  
   -ip string  
         IP address to connect (default "10.45.1.20")  
   -port string  
