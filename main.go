@@ -89,18 +89,7 @@ func stopSound(alarmPlaying *bool) {
 	*alarmPlaying = false
 }
 
-//	func playSound(soundFile *string, alarmPlaying *bool) {
-//		*alarmPlaying = true
-//
-//		cmd := exec.Command("C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe", "C:\\Windows\\Media\\ringout.wav")
-//		err := cmd.Start()
-//		if err != nil {
-//			log.Fatal(err)
-//		}
-//		log.Printf("Windows Media Player has been started with ringout.wav!")
-//
-//		*alarmPlaying = false
-//	}
+// When compiling for Windows:
 func playSound(soundFile string, alarmPlaying *bool) {
 	*alarmPlaying = true
 
@@ -113,3 +102,18 @@ func playSound(soundFile string, alarmPlaying *bool) {
 
 	*alarmPlaying = false
 }
+
+
+//// When compiling for Linux:
+//func playSound(soundFile *string, alarmPlaying *bool) {
+//	*alarmPlaying = true
+//	cmd := exec.Command("aplay", *soundFile)
+//	err := cmd.Start()
+//	if err != nil {
+//		fmt.Println("Failed to start sound:", err)
+//		*alarmPlaying = false
+//		return
+//	}
+//	cmd.Wait()
+//	*alarmPlaying = false
+//}
